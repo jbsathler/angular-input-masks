@@ -82,7 +82,7 @@ describe('ui-br-phone-number', function() {
 		});
 
 		var model = input.controller('ngModel');
-		expect(model.$viewValue).toBe('12345-6789');
+		expect(model.$viewValue).toBe('1-2345-6789');
 	});
 
 	it('should ignore non digits', function() {
@@ -141,8 +141,14 @@ describe('ui-br-phone-number', function() {
 		expect(model.$viewValue).toBe('(12) 3456-7890');
 		expect(model.$modelValue).toBe(1234567890);
 		input.val('12345678901').triggerHandler('input');
-		expect(model.$viewValue).toBe('(12) 34567-8901');
+		expect(model.$viewValue).toBe('(12) 3-4567-8901');
 		expect(model.$modelValue).toBe(12345678901);
+		input.val('123456789012').triggerHandler('input');
+		expect(model.$viewValue).toBe('+12 (34) 5678-9012');
+		expect(model.$modelValue).toBe(123456789012);
+		input.val('1234567890123').triggerHandler('input');
+		expect(model.$viewValue).toBe('+12 (34) 5-6789-0123');
+		expect(model.$modelValue).toBe(1234567890123);
 	});
 
 	it('should use the type of the model value (if initialized)', function() {
@@ -155,7 +161,7 @@ describe('ui-br-phone-number', function() {
 		expect(model.$modelValue).toBe(1234567890);
 
 		numberInput.val('12345678901').triggerHandler('input');
-		expect(model.$viewValue).toBe('(12) 34567-8901');
+		expect(model.$viewValue).toBe('(12) 3-4567-8901');
 		expect(model.$modelValue).toBe(12345678901);
 
 		numberInput.val('32375486').triggerHandler('input');
@@ -167,7 +173,7 @@ describe('ui-br-phone-number', function() {
 		});
 
 		stringInput.val('992561546').triggerHandler('input');
-		expect(model.$viewValue).toBe('99256-1546');
+		expect(model.$viewValue).toBe('9-9256-1546');
 		expect(model.$modelValue).toBe('992561546');
 
 		stringInput.val('08001231234').triggerHandler('input');
