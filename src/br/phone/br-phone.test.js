@@ -46,7 +46,25 @@ describe('ui-br-phone-number', function() {
 		});
 
 		var model = input.controller('ngModel');
-		expect(model.$viewValue).toBe('(12) 34567-8901');
+		expect(model.$viewValue).toBe('(12) 3-4567-8901');
+	});
+
+	it('should format initial model values (2+2+8D)', function() {
+		var input = TestUtil.compile('<input ng-model="model" ui-br-phone-number>', {
+			model: 123456789012
+		});
+
+		var model = input.controller('ngModel');
+		expect(model.$viewValue).toBe('+12 (34) 5678-9012');
+	});
+
+	it('should format initial model values (2+2+9D)', function() {
+		var input = TestUtil.compile('<input ng-model="model" ui-br-phone-number>', {
+			model: '1234567890123'
+		});
+
+		var model = input.controller('ngModel');
+		expect(model.$viewValue).toBe('+12 (34) 5-6789-0123');
 	});
 
 	it('should format initial model values (8D)', function() {
